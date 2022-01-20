@@ -1,0 +1,238 @@
+/***************************全体*************************************/
+.container {/**sideとmain**/
+    display: flex;/**sideとmainを左右横並びにする**/
+    justify-content: center;/**フレックスアイテムの主軸方向の揃え位置を指定**/
+}
+
+.side {
+    width: 90px;
+}
+
+/*******************メイン（右）*****************/
+.main {
+    width: calc(100% - 90px);/*sideをひいた残りのスペースとする*/
+    border-left: 1px solid #eef;
+    border-right: 1px solid #eef;
+    text-align: left;/**テキストを左よせにする**/
+    max-width: 600px;
+}
+
+@media screen and (max-width:500px){/**★レスポンシブ対応★--横幅が500px以下の時に適用**/
+    .container{
+        padding:0; /**ページの外側のpaddingをなくす**/       
+    }
+    .side{
+        width:60px;
+    }
+    .main{
+       width:calc(100% - 60px);
+   }   
+   .side .side-inner .flex-column .nav-item img{/**サイドのアイコン達**/
+    width:70%;
+    margin-bottom:15px;
+ } 
+    .side .side-inner img.icon{/**サイトロゴの横幅**/
+        width:85%;
+    }
+    .side .side-inner img.post-tweet{
+        width:100%;
+    }
+    .side .side-inner .my-icon img{
+        width:90%;
+    }
+    .home .tweet-list .tweet .user{
+        width:60px;
+        padding:5px 10px 10px 5px;
+    }
+    .bottom-area .btn{
+        margin-top:10px;
+    }
+}
+
+
+
+.main .main-header{
+    padding: 20px;
+    border-bottom: 1px solid #eef;
+}
+
+.main .main-header h1{
+    font-size: 20px;
+    line-height: 20px;/**行間の設定**/
+    font-weight: bold;/**文字を太くする**/
+    margin-bottom: 0;/***余計な空間をなくす**/
+}
+
+.btn{/**つぶやくボタン*/
+    background-color: #1af;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn:hover{/**マウスが重なったとき**/
+    color: #fff;/**ここで何もしてないと、マウスが重なったとき文字が黒色になる**/
+}
+
+a{
+    text-decoration: none;
+}
+
+/*********************サイド（左）********************/
+.side .side-inner {
+    position: sticky;/**スクロールに応じてポジションを固定させる**/
+    height: 100vh;/**viewportの高さに基づく。（1vhはviewportの高さの1%）**/
+    top: 0px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.side .side-inner img {/**アイコンの大きさ**/
+    width: 35%;/**％にすることで.nav-linkの大きさによって比率が変わる**/
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    padding: .3rem .3rem;/**リンクの範囲を設定（カーソルの範囲）**/
+}
+
+.side .side-inner img.icon {/**一番上のアイコン**/
+    width: 70%;
+}
+
+.side .side-inner img.post-tweet {/**ツイートボタンのアイコン**/
+    width: 80%;
+}
+
+.side .side-inner .my-icon {/**自分の画像アイコンの位置設定**/
+    position: absolute;/**①アイコン一覧の左上を起点にする**/
+    z-index: 1;/**他にもアイコンがあるので、要素を手前に来るように表示させる。①とセットで使うようにする**/
+    bottom: 0;/**②下を0にすることでアイコンが一番下に来る**/
+}
+
+.side .side-inner .my-icon img {/**アイコン画像自体の編集**/
+    width: 60%;
+    border-radius: 50%;/***角を取る機能。50％にすることで完全な丸になる**/
+    border: 0.2px solid #aaa;
+}   
+
+
+/*********************ホーム(メイン右の中身)***************************/
+/*************つぶやき投稿エリア**************/
+.home .tweet-post{
+    display: flex;/**自分のアイコンとつぶやきエリアを横並びにする**/
+    padding: 10px;
+}
+
+.home .tweet-post .my-icon{/**アイコンが設置されているブロック**/
+    width: 80px;
+    padding: 5px 10px 10px 15px;
+}
+
+.home .tweet-post .my-icon img{/**アイコン自体**/
+    width: 100%;/**アイコンブロック80pxに対して100％の大きさ**/
+    border-radius: 50%;
+    border: 0.2px solid #aaa;
+}
+
+.home .tweet-post .input-area{/**フォームが設置されたブロック**/
+    width: calc(100% - 80px);/**アイコンエリア80pxを全体から引く**/
+    flex-grow: 1;/**横幅の伸び率を指定？**/
+}
+
+.home .tweet-post .input-area textarea{/**テキストボックス自体の要素**/
+    border: 0;/**枠線をなくす**/
+    width: 100%;/**横いっぱいにする（上記の100-80に従う）**/
+    height: 100px;
+    resize: none;/**テキストボックスのサイズを変更できなくする**/
+}
+
+.home .tweet-post .input-area textarea:focus{/**focus=「要素が選択されたとき」**/
+    outline: none;/**これがないとテキストエリアにカーソルを当てた時に枠線が出る！**/
+}
+
+.home .tweet-post .input-area .bottom-area{/**ファイル選択＆つぶやくボタンのエリア全体**/
+    display: flex;/**ファイル選択とつぶやくボタンを横並びにする**/
+    flex-wrap: wrap;/**横並びにして、横にはみ出る場合に2つ目を改行してくれる**/
+    justify-content: space-between;/**フレックスコンテンツ同士を遠ざけるように両端に移動**/
+    border-top: 1px solid #eef;/**上部に線を挿入**/
+    padding-top: 8px;/**線と上部の間に隙間を作る**/
+}
+
+.home .ditch{/**投稿エリアと一覧エリアの仕切り部分**/
+    height: 15px;
+    background-color: #f7f8f8;
+    border-top: 1px solid #eef;
+    border-bottom: 1px solid #eef;
+}
+
+
+/*******************投稿一覧エリア****************/
+
+.home .tweet-list .tweet{/**アイコンとツイート表示エリアを横並びに**/
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid #eef;/***ツイートの下に灰色のラインを引く**/
+}
+.home .tweet-list .tweet .user{/**ユーザーアイコンエリアのサイズ**/
+    width: 80px;
+    padding: 5px 15px 10px 10px;
+}
+
+.home .tweet-list .tweet .user img{/**ユーザーのアイコン画像の設定**/
+    width: 100%;
+    border-radius: 50%;
+    border: 0.2px solid #aaa;
+}
+.home .tweet-list .tweet .name{/**太郎＠taro・23日前の上に間を入れる**/
+    padding-top: 5px;
+}
+.home .tweet-list .tweet .name a{
+    color: #122;
+}
+.home .tweet-list .tweet .name a .nickname{/**ニックネームの文字**/
+    color: #122;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.home .tweet-list .tweet .name a .user-name{/**ユーザー名・何日前かの文字**/
+    color: #444;
+    font-size: 14px;
+}
+
+.home .tweet-list .tweet .content{/**つぶやき内容表示エリア**/
+    width: calc(100% - 60px);
+}
+
+.home .tweet-list .tweet .content p{/**つぶやき内容**/
+    font-size: 16px;
+    padding: 8px 0 0 0;
+    margin-bottom: 8px;
+}
+
+.post-image{/**次郎が投稿した写真**/
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    border: 1px solid #eef;
+}
+
+.home .tweet-list .tweet .content .icon-list{/**ハートアイコンとお気に入り数を横並び**/
+    display: flex;
+    
+}
+.home .tweet-list .tweet .content .icon-list .like img{/**ハートアイコン**/
+    width: 25px;
+    margin-right: 10px;
+    cursor: pointer;/**マウスが重なったとき指の矢印になるように**/
+}
+.home .tweet-list .tweet .content .icon-list .like-count{/**いいね数**/
+    width: 25px;
+    padding-top: 2px;
+    color: #444;
+}
+
+
+
