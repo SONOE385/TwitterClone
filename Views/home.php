@@ -30,6 +30,7 @@ $view_tweets = [
       ]
 ];
 
+
 ///////////////便利な関数//////////////////
 /** 
 * 画像ファイル名から画像のURLを生成する
@@ -96,6 +97,14 @@ function convertToDayTimeAgo(string $datetime)//string=文字列。文字列以�
     <!-- Bootstrap--CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous" defer></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
+    <!-- いいね！JS -->
+    <script src="<?php echo HOME_URL; ?>Views/js/likes.js" defer></script>
+    
     <title>ホーム画面 / Twitterクローン</title>
     <meta name="description" content="ホーム画面です">
 </head>
@@ -110,7 +119,9 @@ function convertToDayTimeAgo(string $datetime)//string=文字列。文字列以�
                     <li class="nav-item"><a href="notification.php" class="nav-link"><img src="<?php echo HOME_URL; ?>Views/img/icon-notification.svg" alt=""></a>
                     <li class="nav-item"><a href="profile.php" class="nav-link"><img src="<?php echo HOME_URL; ?>Views/img/icon-profile.svg" alt=""></a>
                     <li class="nav-item"><a href="post.php" class="nav-link"><img src="<?php echo HOME_URL; ?>Views/img/icon-post-tweet-twitterblue.svg" alt="" class="post-tweet"></a>
-                    <li class="nav-item my-icon"><img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt=""></li>    
+                    <li class="nav-item my-icon"><img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt="" class="js-popover"
+                    data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-html="true" 
+                    data-bs-content="<a href='profile.php'>プロフィール</a><br><a href='sign-out.php'>ログアウト</a>">    
                 </li>
                 </ul>
 
@@ -157,9 +168,9 @@ function convertToDayTimeAgo(string $datetime)//string=文字列。文字列以�
                     <div class="name"><!--ユーザー情報が入る-->
                         <a href="profile.php?user_id=<?php echo htmlspecialchars($view_tweet['user_id']); ?>">
                             <span class="nickname"><!--ニックネーム、ユーザー名、投稿日時から何日経過したか-->
-                            <!--太郎--><?php echo htmlspecialchars($view_tweet['user_nickname']); ?>
+                            <?php echo htmlspecialchars($view_tweet['user_nickname']); ?><!--太郎-->
                             </span>
-                            <span class="user-name">@<!--taro--><?php echo htmlspecialchars($view_tweet['user_name']);?> ・
+                            <span class="user-name">@<?php echo htmlspecialchars($view_tweet['user_name']);?> ・
 
                             <?php echo convertToDayTimeAgo($view_tweet['tweet_created_at']);?></span>
                             
@@ -174,27 +185,31 @@ function convertToDayTimeAgo(string $datetime)//string=文字列。文字列以�
                         <?php endif ?>
                         
                         <div class="icon-list"><!--いいねの♥といいねの数が入る-->
-                            <div class="like">
+                            <div class="like js-like" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
                             <?php 
                             if (isset($view_tweet['like_id'])){//もし、like_idが存在していれば、青いハートを出す。isset関数
                                 echo '<img src="' .HOME_URL. 'Views/img/icon-heart-twitterblue.svg" alt="">';
-                            }
-                            else{//like_idが何もなければ、グレーのハートを出す
+                            }else{//like_idが何もなければ、グレーのハートを出す
                                 echo '<img src="' .HOME_URL. 'Views/img/icon-heart.svg" alt="">';
                             }
                             ?>        
                             </div>
-                            <div class="like-count"><!--0--><?php echo htmlspecialchars($view_tweet['like_count']); ?></div><!--いいね数-->
+                            <div class="like-count js-like-count"><?php echo htmlspecialchars($view_tweet['like_count']); ?></div><!--いいね数-->
                         </div>
                 </div>
             </div>
 
             
-        <?php endforeach; ?>
+                <?php endforeach; ?>
         </div>
 
-        <?php endif; ?>
+                        <?php endif; ?>
     </div>
     </div>
+    <script>//第一引数にDOMContentLoadedを入れると、htmlの読み込みが終了した段階で第2引数の処理を始める
+        document.addEventListener('DOMContentLoaded',function(){
+            $('.js-popover').popover();
+        },false);
+    </script>
  </body>
 </html>
