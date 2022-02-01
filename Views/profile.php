@@ -1,52 +1,44 @@
+<?php
+//設定関連を読み込む
+include_once('../config.php');
+//便利な関数
+include_once('../util.php');
+
+////////ツイート一覧エリアを動的にする/////////
+$view_tweets = [
+    ['user_id'=>1,
+     'user_name'=>'taro',
+     'user_nickname'=>'太郎',
+     'user_image_name'=>'sample-person.jpg',//アイコン画像
+     'tweet_body'=>'今プログラミングをしています。',//つぶやき本文
+     'tweet_image_name'=>null,//投稿画像。1件目は投稿がないのでnull
+     'tweet_created_at'=>'2022-01-22 14:00:00',//投稿日時
+     'like_id'=>null,//自分がいいねしていたら入ってくるid
+     'like_count'=>0,//いいね数
+    ]
+];
+?>
+
 <!DOCTYPE html>
  <!--Githubトークン----ccd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 -->
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../Views/img/logo-twitterblue.svg"><!--ページタイトル先頭のアイコン-->
-    <!-- Bootstrap--CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
-
-    <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous" defer></script>
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
-    <!-- いいね！JS -->
-    <script src="../Views/js/likes.js" defer></script>
+<?php include_once('../Views/common/head.php'); ?>
     
     <title>プロフィール画面 / Twitterクローン</title>
     <meta name="description" content="プロフィール画面です">
 </head>
 <body class="home profile text-center">
     <div class="container"><!--中身全体-->
-        <div class="side"><!--左サイドのリンク全体-->
-            <div class="side-inner"><!--サイドのインナークラス-->
-                <ul class="nav flex-column"><!--Bootstrapのクラス（推奨）縦アイコン7個-->
-                    <li class="nav-item"><a href="home.php" class="nav-link"><img src="../Views/img/logo-twitterblue.svg" alt="" class="icon"></a>
-                    <li class="nav-item"><a href="home.php" class="nav-link"><img src="../Views/img/icon-home.svg" alt=""></a>   
-                    <li class="nav-item"><a href="search.php" class="nav-link"><img src="../Views/img/icon-search.svg" alt=""></a>
-                    <li class="nav-item"><a href="notification.php" class="nav-link"><img src="../Views/img/icon-notification.svg" alt=""></a>
-                    <li class="nav-item"><a href="profile.php" class="nav-link"><img src="../Views/img/icon-profile.svg" alt=""></a>
-                    <li class="nav-item"><a href="post.php" class="nav-link"><img src="../Views/img/icon-post-tweet-twitterblue.svg" alt="" class="post-tweet"></a>
-                    <li class="nav-item my-icon"><img src="../Views/img_uploaded/user/sample-person.jpg" alt="" class="js-popover"
-                    data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-html="true" 
-                    data-bs-content="<a href='profile.php'>プロフィール</a><br><a href='sign-out.php'>ログアウト</a>">    
-                </li>
-                </ul>
-
-            </div>        
-        </div>
+    <?php include_once('../Views/common/side.php'); ?>
         <div class="main"><!--右サイドのつぶやきエリア-->
             <div class="main-header">
-            <h1>太郎</h1>
+                <h1>太郎</h1>
             </div>
         <!---プロフィールエリア--->
         <div class="profile-area">
             <div class="top"><!--アイコン・編集ボタン-->
-                <div class="user"><img src="../Views/img_uploaded/user/sample-person.jpg" alt=""></div>
+                <div class="user"><img src="<?php echo HOME_URL; ?>Views//img_uploaded/user/sample-person.jpg" alt=""></div>
 
                 <?php if( isset($_GET['user_id']) ):?><!--URLの最後にuser_idがあれば-->
                     <!--相手のページ-->
@@ -72,7 +64,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="user">
-                                        <img src="../Views/img_uploaded/user/sample-person.jpg" alt="">
+                                        <img src="<?php echo HOME_URL; ?>Views//img_uploaded/user/sample-person.jpg" alt="">
                                     </div>
                                     <div class="mb-3"><!--アイコン画像のアップロードボタン-->
                                         <label for="" class="mb-1">プロフィール写真</label>
@@ -107,21 +99,24 @@
         </div>
 
 
-
-
-
-        
         <!--仕切りエリア-->
         <div class="ditch"></div>
-
-        <!--つぶやき一覧エリア-->
         
+        <!--TODO:つぶやき一覧エリア-->
+        <!--つぶやき一覧エリア-->
+        <?php if(empty($view_tweets)) : ?><!---つぶやきがない場合の表示を作成--->
+            <p class="p-3">ツイートがありません</p><!--p-3はpaddingのことで、全方向1remの余白をあける-->
+
+        <?php else: ?><!--ここのelseから下のendifまで、データがあった場合-->
+            <div class="tweet-list">
+                <?php foreach($view_tweets as $view_tweet): ?>
+            <?php include('../Views/common/tweet.php'); ?>
+            <?php endforeach; ?>
+        </div>
+
+        <?php endif; ?>
     </div>
     </div>
-    <script>//第一引数にDOMContentLoadedを入れると、htmlの読み込みが終了した段階で第2引数の処理を始める
-        document.addEventListener('DOMContentLoaded',function(){
-            $('.js-popover').popover();
-        },false);
-    </script>
+    <?php include_once('../Views/common/foot.php'); ?>
  </body>
 </html>

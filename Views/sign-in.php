@@ -1,14 +1,15 @@
+<?php
+//設定関連を読み込む
+include_once('../config.php');
+//便利な関数
+include_once('../util.php');
+?>
+
 <!DOCTYPE html>
  <!--Githubトークン----ccd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 -->
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../Views/img/logo-twitterblue.svg"><!--ページタイトル先頭のアイコン-->
-    <!-- Bootstrap--CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
+    <?php include_once('../Views/common/head.php'); ?>
 
     
     <title>ログイン画面 / Twitterクローン</title>
@@ -17,7 +18,7 @@
 <body class="signup text-center"><!--text-center=Bootstrapのクラスでテキストを中央寄せにする-->
     <main class="form-signup">
         <form action="sign-in.php" method="post"><!--同ページ内にデータをPOSTする-->
-            <img src="../Views/img/logo-white.svg" alt="" class="logo-white">
+            <img src="<?php echo HOME_URL; ?>Views//img/logo-white.svg" alt="" class="logo-white">
             <h1>Twitterクローンにログイン</h1><!--placeholder=背景文字、required=必須項目、autofocus=ページ表示の際に自動で選択されているように-->
             
             <input type="email" class="form-control" name="email" placeholder="メールアドレス" required autofocus>
@@ -28,7 +29,7 @@
             <p class="mt-2 mb-3 text-muted">&copy; 2021</p><!--text-muted=文字を灰色にする-->
         </form>
     </main>
-    
+    <?php include_once('../Views/common/foot.php'); ?>
 </body>
 
 
