@@ -1,10 +1,3 @@
-<?php
-//設定関連を読み込む
-include_once('../config.php');
-//便利な関数
-include_once('../util.php');
-?>
-
 <!DOCTYPE html>
  <!--Githubトークン----ccd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 -->
 <html lang="ja">
