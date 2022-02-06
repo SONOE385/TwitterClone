@@ -1,9 +1,3 @@
-<?php
-//設定関連を読み込む
-include_once('../config.php');
-//便利な関数
-include_once('../util.php');
-?>
 
 <!DOCTYPE html>
  <!--Githubトークン----ccd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 -->
@@ -20,7 +14,13 @@ include_once('../util.php');
         <form action="sign-in.php" method="post"><!--同ページ内にデータをPOSTする-->
             <img src="<?php echo HOME_URL; ?>Views//img/logo-white.svg" alt="" class="logo-white">
             <h1>Twitterクローンにログイン</h1><!--placeholder=背景文字、required=必須項目、autofocus=ページ表示の際に自動で選択されているように-->
-            
+
+            <?php if( isset($view_try_login_result) && $view_try_login_result === false): ?>
+                <div class="alert alert-warning text-sm" role="alert">
+                    ログインに失敗しました。メールアドレス、パスワードが正しいかご確認ください。
+                </div>
+            <?php endif; ?>
+
             <input type="email" class="form-control" name="email" placeholder="メールアドレス" required autofocus>
             <input type="password" class="form-control" name="password" placeholder="パスワード" required>
             <button class="w-100 btn btn-lg" type="submit">ログイン</button><!--w-100=widthが100、lg=大きなボタン-->

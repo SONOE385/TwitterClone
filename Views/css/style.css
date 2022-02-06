@@ -126,12 +126,14 @@ body.signup{
     color: #1af;
 }
 
-
-
 a{
     font-size:13px;
     color:#1af;
     text-decoration: none;
+}
+
+.text-sm{
+    font-size: 0.7rem;
 }
 
 /*********************サイド（左）********************/
