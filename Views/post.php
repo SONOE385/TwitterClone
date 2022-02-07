@@ -1,11 +1,3 @@
-<?php
-//設定関連を読み込む
-include_once('../config.php');
-//便利な関数
-include_once('../util.php');
-
-?>
-
 <!DOCTYPE html>
  <!--Githubトークン----ccd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 -->
 <html lang="ja">
@@ -24,7 +16,7 @@ include_once('../util.php');
         <!----つぶやき投稿エリア---アイコンとフォーム送信エリアに分ける-->
         <div class="tweet-post">
             <div class="my-icon">
-                <img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt="">
+                <img src="<?php echo htmlspecialchars($view_user['image_path']); ?>" alt=""><!--セッションのユーザー情報から取得したイメージパスを読み込む-->
             </div>
             <div class="input-area">
                 <form action="post.php" method="post" enctype="multipart/form-data"><!--ファイルの送信がある場合enctypeがいる-->

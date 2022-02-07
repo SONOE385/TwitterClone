@@ -119,6 +119,47 @@ function getUserSession()
     return $user;
 }
 
+/**
+ * アップロードされた画像を保存する関数
+ * 
+ * @param array $user
+ * @param array $file
+ * @param string $type
+ * @return string 画像のファイル名
+ */
+//引数はユーザー情報とアップロードされたファイル情報、$typeはユーザーのアイコンか、つぶやきの画像かが入る
+function uploadImage(array $user, array $file, string $type)
+{
+    //画像のファイル名から拡張子を取得
+    //strrchrでファイル名の後ろからドットがくるまでを取得
+    $image_extension = strrchr($file['name'],'.');
+
+    //画像のファイル名を作成（YmdHis:2021-01-01 00:00:00ならば20210101000000）
+    $image_name = $user['id'] . '_' . date('YmdHis'). $image_extension;
+
+    //保存先のディレクトリ（$typeにはuserかtweetという文字列が入る）
+    $directory = '../Views/img_uploaded/' . $type . '/';
+
+    //画像のパス
+    $image_path = $directory . $image_name;
+
+    //画像を設置(move_uploaded_file関数で、アップロードされた一時ファイル$file['tmp_name']を指定の場所$image_pathに格納)
+    move_uploaded_file($file['tmp_name'],$image_path);
+
+    //画像ファイルの場合->ファイル名をreturn
+    if(exif_imagetype($image_path)){
+        return $image_name;
+    }
+
+    //画像ファイル以外の場合
+    echo '選択されたファイルが画像ではないため処理を停止しました。';
+    exit;
+
+
+}
+
+
+
 
 
 
