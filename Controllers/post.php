@@ -25,7 +25,8 @@ if(!$user){
 if(isset($_POST['body'])){
     $image_name = null;
 
-    //もし、imageというファイルが存在し、かつアップロードされたものなら、//画像をアップロード
+    //もし、imageというファイルが存在し、かつアップロードされたものなら、画像をアップロード
+    //['tmp_name']は必ず2つ目につけるものらしい。。
     if(isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])){
         $image_name = uploadImage($user,$_FILES['image'],'tweet');
     }

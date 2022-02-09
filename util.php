@@ -137,11 +137,15 @@ function uploadImage(array $user, array $file, string $type)
     //画像のファイル名を作成（YmdHis:2021-01-01 00:00:00ならば20210101000000）
     $image_name = $user['id'] . '_' . date('YmdHis'). $image_extension;
 
-    //保存先のディレクトリ（$typeにはuserかtweetという文字列が入る）
+    //保存先のディレクトリファイル（$typeにはuserかtweetという文字列が入る）
     $directory = '../Views/img_uploaded/' . $type . '/';
 
     //画像のパス
     $image_path = $directory . $image_name;
+
+    var_dump($image_path);
+    exit;
+
 
     //画像を設置(move_uploaded_file関数で、アップロードされた一時ファイル$file['tmp_name']を指定の場所$image_pathに格納)
     move_uploaded_file($file['tmp_name'],$image_path);
