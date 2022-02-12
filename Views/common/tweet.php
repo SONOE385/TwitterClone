@@ -24,7 +24,7 @@
             <?php endif ?>
                         
             <div class="icon-list"><!--いいねの♥といいねの数が入る-->
-                <div class="like js-like" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
+                <div class="like js-like" data-tweet-id="<?php echo htmlspecialchars($view_tweet['tweet_id']); ?>" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
                     <?php 
                         if (isset($view_tweet['like_id'])){//もし、like_idが存在していれば、青いハートを出す。isset関数
                             echo '<img src="' .HOME_URL. 'Views/img/icon-heart-twitterblue.svg" alt="">';
