@@ -3,7 +3,6 @@
 include_once('../config.php');
 //便利な関数
 include_once('../util.php');
-
 ////////ツイート一覧エリアを動的にする/////////
 $view_tweets = [
     ['user_id'=>1,
@@ -20,7 +19,7 @@ $view_tweets = [
 ?>
 
 <!DOCTYPE html>
- <!--Githubトークン----ccd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 -->
+
 <html lang="ja">
 <head>
 <?php include_once('../Views/common/head.php'); ?>
