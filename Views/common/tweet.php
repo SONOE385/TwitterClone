@@ -16,7 +16,7 @@
                             
             </a>
         </div>
-            <p><!--今プログラミングをしています--><?php echo $view_tweet['tweet_body']; ?></p><!--投稿の内容-->
+            <p><?php echo $view_tweet['tweet_body']; ?></p><!--投稿の内容-->
                         
             <!--ifにすることで、画像を投稿してないのにimgタグが表示されるのを防ぐ。issetで画像がある場合は表示させるという式-->
             <?php if (isset($view_tweet['tweet_image_name'])):?>
@@ -24,11 +24,11 @@
             <?php endif ?>
                         
             <div class="icon-list"><!--いいねの♥といいねの数が入る-->
-                <div class="like js-like" data-tweet-id="<?php echo htmlspecialchars($view_tweet['tweet_id']); ?>" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
+                <div class="like js-like" data-tweet-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
                     <?php 
-                        if (isset($view_tweet['like_id'])){//もし、like_idが存在していれば、青いハートを出す。isset関数
+                        if (isset($view_tweet['like_id'])){
                             echo '<img src="' .HOME_URL. 'Views/img/icon-heart-twitterblue.svg" alt="">';
-                        }else{//like_idが何もなければ、グレーのハートを出す
+                        }else{
                             echo '<img src="' .HOME_URL. 'Views/img/icon-heart.svg" alt="">';
                         }
                     ?>        
