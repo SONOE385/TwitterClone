@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Tokyo');
 define('HOME_URL','/');
 //データベースの接続情報
 define('DB_HOST',getenv('DB_HOST'));
-define('DB_USER',getenv('DB_USER'));
+define('DB_USER',getenv('DB_USERNAME'));
 define('DB_PASSWORD',getenv('DB_PASSWORD'));
 define('DB_NAME',getenv('DB_DATABASE'));
 
