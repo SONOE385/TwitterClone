@@ -4,7 +4,7 @@ ini_set('display_errors',1);
 //日本時間にする
 date_default_timezone_set('Asia/Tokyo');
 //URLを定数に置き換える
-define('HOME_URL','/TwitterClone/');
+define('HOME_URL','/');
 //データベースの接続情報
 define('DB_HOST',getenv('DB_HOST'));
 define('DB_USER',getenv('DB_USER'));
