@@ -20,7 +20,7 @@ if (!$user) {
 }
  
 // 検索キーワードを取得
-$keyword = null;
+$keyword = '';
 if (isset($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
