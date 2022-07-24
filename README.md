@@ -3,8 +3,8 @@
 Twitterの機能を真似して作成した、ツイート投稿サイトです。
  
 # DEMO
-https://create-twitter-clone.herokuapp.com/Controllers/home.php
- 
+[WEBサイトで見る]（https://create-twitter-clone.herokuapp.com/Controllers/home.php）
+![TwitterClone](https://user-images.githubusercontent.com/95341532/180628112-ab9a4848-94fd-4d57-aaad-28c52deebf8f.png)
 
  
 # Features
